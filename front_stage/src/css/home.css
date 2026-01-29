@@ -1,0 +1,736 @@
+:root {
+    --teal: #007c89;
+    --bg: #f4f7f6;
+}
+
+/* --- Wrapper général --- */
+.dashboard-wrapper {
+    display: flex;
+    min-height: 100vh;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: var(--bg);
+}
+
+/* --- Sidebar --- */
+.sidebar {
+    width: 220px;
+    background-color: var(--teal);
+    color: #fff;
+    height: 100vh;
+    padding: 20px 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.sidebar-logo {
+    width: 200px;
+    height: 200px;
+    border-radius: 100%;
+    object-fit: cover;
+    border: 2px solid #fff;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+}
+
+.sidebar-menu {
+    list-style: none;
+    padding: 0;
+    width: 100%;
+}
+
+.menu-label {
+    color: #7dd3fc;
+    font-size: 26px;
+    font-weight: bold;
+    letter-spacing: 2px;
+    margin: 30px 0 20px 20px;
+}
+
+.menu-btn {
+    display: block;
+    width: 100%;
+    padding: 15px 25px;
+    border: none;
+    background-color: transparent;
+    color: white;
+    font-size: 18px;
+    text-align: left;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.menu-btn:hover,
+.menu-btn.active {
+    background-color: #1e293b;
+    transform: translateX(5px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+/* --- Main area --- */
+.main-area {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    height: 100vh;
+}
+
+/* --- Top navbar --- */
+.top-navbar {
+    height: 60px;
+    background: white;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end; /* tout à gauche */
+    padding: 0 20px;
+    border-bottom: 1px solid #ddd;
+}
+
+/* Bloc utilisateur */
+.user-profile-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    position: relative;
+    justify-content: flex-start; /* bouton et nom à gauche */
+    background: #f8f9fa;
+    padding: 5px 15px;
+    border-radius: 30px;
+    border: 1px solid #eee;
+}
+
+.nav-user-avatar {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #0a7c80, #0f9ea3);
+    color: white;
+    font-weight: bold;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    letter-spacing: 1px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+}
+
+.username-text {
+    font-weight: 600;
+    color: #333;
+    font-size: 14px;
+}
+
+.dots-menu-btn {
+    background: none;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+    color: #666;
+    padding: 0 5px;
+    display: flex;
+    align-items: center;
+}
+
+/* Menu déroulant */
+.custom-dropdown-menu {
+    position: absolute;
+    top: 45px;
+    right: 0; /* aligné avec le bouton */
+    background: white;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    border-radius: 10px;
+    width: 220px;
+    z-index: 999;
+    border: 1px solid #f0f0f0;
+    overflow: hidden;
+}
+
+.dropdown-item {
+    padding: 12px 15px;
+    font-size: 14px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.dropdown-item:hover {
+    background-color: #f1f1f1;
+}
+
+.logout-red {
+    color: #e53935;
+    font-weight: 500;
+}
+
+/* --- Table --- */
+.table-card {
+    background: white;
+    margin: 20px;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.table-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    align-items: center;
+}
+
+.custom-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.custom-table th {
+    text-align: left;
+    padding: 12px;
+    border-bottom: 2px solid #eee;
+    color: #666;
+}
+
+.custom-table td {
+    padding: 12px;
+    border-bottom: 1px solid #eee;
+}
+
+.actions-cell {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+}
+
+.action-btn {
+    border: none;
+    background: none;
+    cursor: pointer;
+    font-size: 18px;
+    padding: 5px;
+    border-radius: 4px;
+}
+
+.action-btn:hover {
+    background: #f0f0f0;
+}
+
+.btn-add-new {
+    background: var(--teal);
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+/* --- Search filters --- */
+.search-filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    align-items: flex-end;
+    margin: 15px 0 20px 0;
+    margin-bottom: auto;
+}
+
+.filter-group {
+    display: flex;
+    flex:1;
+    min-width: 180px ;
+    width: 100%;
+    flex-direction: column;
+    gap: 6px;
+    margin-bottom: auto;
+}
+
+.filter-group label {
+    font-weight: 600;
+    font-size: 14px;
+    color: #333;
+}
+
+.filter-group input,
+.filter-group select {
+    padding: 8px 10px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    min-width: 180px;
+}
+
+/* --- Modals --- */
+.modal-overlay {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(15, 23, 42, 0.55);
+    backdrop-filter: blur(6px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 999;
+}
+
+.modal-content {
+    background: #ffffff;
+    width: 480px;
+    max-width: 92%;
+    border-radius: 14px;
+    padding: 20px 22px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.25);
+    animation: fadeInModal 0.25s ease;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.modal-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.btn-submit {
+    background-color: var(--teal);
+    color: white;
+    padding: 10px 25px;
+    border-radius: 8px;
+    border: none;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.btn-cancel {
+    background-color: #f1f1f1;
+    color: #666;
+    padding: 10px 25px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+}
+
+/* --- Form grids --- */
+.form-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    max-height: 60vh;
+    overflow-y: auto;
+}
+
+.input-group {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+}
+
+.input-group label {
+    font-size: 13px;
+    font-weight: bold;
+    color: #555;
+    margin-bottom: 2px;
+}
+
+.input-group input, 
+.input-group select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-sizing: border-box;
+}
+
+/* --- Highlight rows --- */
+.highlight-row {
+    background-color: #e3f2fd !important;
+    border-left: 4px solid #2196f3;
+}
+/* Styles pour le modal large */
+.modal-large {
+  max-width: 900px;
+  width: 90%;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+/* Styles pour les boutons Retirer et Affecter */
+.btn-retirer {
+  background-color: #e74c3c;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  transition: background-color 0.3s ease;
+}
+
+.btn-retirer:hover {
+  background-color: #c0392b;
+}
+
+.btn-affecter {
+  background-color: #27ae60;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  transition: background-color 0.3s ease;
+}
+
+.btn-affecter:hover {
+  background-color: #229954;
+}
+
+/* Style pour les titres h5 dans le modal */
+.modal-content h5 {
+  margin-top: 25px;
+  margin-bottom: 15px;
+  color: #2c3e50;
+  font-size: 18px;
+  font-weight: 600;
+  border-bottom: 2px solid #3498db;
+  padding-bottom: 8px;
+}
+
+/* Styles pour les tableaux dans le modal */
+.modal-content .custom-table {
+  margin-top: 15px;
+}
+
+.modal-content .custom-table tbody tr:hover {
+  background-color: #f8f9fa;
+}
+
+/* Style pour message "Aucun stagiaire" */
+.text-center {
+  text-align: center;
+  padding: 20px;
+  color: #7f8c8d;
+  font-style: italic;
+}
+/* ===================================
+   STYLES POUR MODAL STAGIAIRES
+   À ajouter à la fin de votre fichier home.css
+   =================================== */
+
+/* Overlay - Fond sombre */
+.modal-overlay-stagiaires {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  animation: fadeIn 0.2s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* Modal Content */
+.modal-content-stagiaires {
+  background: white;
+  border-radius: 12px;
+  width: 90%;
+  max-width: 800px;
+  max-height: 85vh;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+  animation: slideUp 0.3s ease;
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(50px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* Header */
+.modal-header-stagiaires {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 25px;
+  border-bottom: 2px solid #e0e0e0;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-radius: 12px 12px 0 0;
+}
+
+.modal-header-stagiaires h3 {
+  margin: 0;
+  font-size: 22px;
+  color: white;
+  font-weight: 600;
+}
+
+.modal-close-btn {
+  background: rgba(255, 255, 255, 0.2);
+  border: none;
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  font-size: 20px;
+  color: white;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+}
+
+.modal-close-btn:hover {
+  background: rgba(255, 255, 255, 0.3);
+  transform: rotate(90deg);
+}
+
+/* Body */
+.modal-body-stagiaires {
+  padding: 25px;
+  overflow-y: auto;
+  flex: 1;
+}
+
+.section-title {
+  margin-bottom: 15px;
+}
+
+.section-title h4 {
+  margin: 0;
+  font-size: 18px;
+  color: #333;
+  font-weight: 600;
+}
+
+/* Liste des stagiaires */
+.stagiaires-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.stagiaire-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px;
+  background: #f8f9fa;
+  border: 2px solid #e9ecef;
+  border-radius: 10px;
+  transition: all 0.2s;
+}
+
+.stagiaire-card:hover {
+  background: #fff;
+  border-color: #667eea;
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.1);
+  transform: translateY(-2px);
+}
+
+.stagiaire-card.disponible {
+  border-color: #28a745;
+  background: #f1f9f3;
+}
+
+.stagiaire-card.disponible:hover {
+  border-color: #28a745;
+  box-shadow: 0 4px 12px rgba(40, 167, 69, 0.15);
+}
+
+.stagiaire-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.stagiaire-name {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.stagiaire-name strong {
+  font-size: 16px;
+  color: #2c3e50;
+}
+
+.avatar-small {
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 14px;
+  flex-shrink: 0;
+}
+
+.avatar-small.disponible {
+  background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+}
+
+.badge-type {
+  display: inline-block;
+  background: #667eea;
+  color: white;
+  padding: 3px 10px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 500;
+  margin-left: 10px;
+}
+
+.stagiaire-period {
+  font-size: 14px;
+  color: #6c757d;
+  padding-left: 57px;
+}
+
+/* Boutons d'action */
+.btn-retirer-stagiaire,
+.btn-affecter-stagiaire {
+  padding: 8px 18px;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  white-space: nowrap;
+}
+
+.btn-retirer-stagiaire {
+  background: #dc3545;
+  color: white;
+}
+
+.btn-retirer-stagiaire:hover {
+  background: #c82333;
+  transform: scale(1.05);
+}
+
+.btn-affecter-stagiaire {
+  background: #28a745;
+  color: white;
+}
+
+.btn-affecter-stagiaire:hover {
+  background: #218838;
+  transform: scale(1.05);
+}
+
+/* Message vide */
+.empty-message {
+  text-align: center;
+  padding: 40px 20px;
+  color: #6c757d;
+  font-style: italic;
+}
+
+.empty-message p {
+  margin: 0;
+  font-size: 15px;
+}
+
+/* Divider */
+.divider {
+  height: 2px;
+  background: linear-gradient(to right, transparent, #e0e0e0, transparent);
+  margin: 30px 0;
+}
+
+/* Footer */
+.modal-footer-stagiaires {
+  padding: 15px 25px;
+  border-top: 2px solid #e0e0e0;
+  display: flex;
+  justify-content: flex-end;
+  background: #f8f9fa;
+  border-radius: 0 0 12px 12px;
+}
+
+.btn-fermer {
+  padding: 10px 30px;
+  background: #6c757d;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.btn-fermer:hover {
+  background: #5a6268;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Scrollbar personnalisée */
+.modal-body-stagiaires::-webkit-scrollbar {
+  width: 8px;
+}
+
+.modal-body-stagiaires::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 10px;
+}
+
+.modal-body-stagiaires::-webkit-scrollbar-thumb {
+  background: #667eea;
+  border-radius: 10px;
+}
+
+.modal-body-stagiaires::-webkit-scrollbar-thumb:hover {
+  background: #5568d3;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .modal-content-stagiaires {
+    width: 95%;
+    max-height: 90vh;
+  }
+
+  .modal-header-stagiaires h3 {
+    font-size: 18px;
+  }
+
+  .stagiaire-card {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .btn-retirer-stagiaire,
+  .btn-affecter-stagiaire {
+    width: 100%;
+  }
+
+  .stagiaire-period {
+    padding-left: 57px;
+    font-size: 13px;
+  }
+}

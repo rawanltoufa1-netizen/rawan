@@ -1,0 +1,79 @@
+
+.login-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+ min-height: 100vh;
+  background-color: #f8f9fa;
+  padding: 20px;
+}
+
+.login-card {
+  width: 100%;
+  max-width: 420px;
+  padding: 40px;
+  background-color: #ffffff; 
+  border: 2px solid #007c89; 
+  border-radius: 30px;      
+  
+
+  box-shadow: 0 10px 25px rgba(0, 124, 137, 0.1); 
+
+}
+
+.login-title {
+  font-family: 'Georgia', serif;
+  font-size: 42px;
+  margin-bottom: 10px;
+}
+
+.input-group { margin-bottom: 20px; }
+.input-group label { display: block; font-weight: bold; margin-bottom: 8px; color: #241c15; }
+.input-group input {
+  width: 100%;
+  padding: 14px 25px;       
+  margin-top: 8px;
+  background-color: #ffffff; 
+  border: 1px solid #bdbdbd; 
+  border-radius: 40px;   
+  font-size: 16px;
+  box-sizing: border-box;
+  outline: none;            
+  transition: all 0.3s ease;
+}
+.input-group input:focus {
+  border-color: #007c89;    
+  box-shadow: 0 0 5px rgba(0, 124, 137, 0.1);
+}
+
+.label-row { display: flex; justify-Content: space-between; }
+.show-toggle { font-size: 13px; color: #007c89; cursor: pointer; }
+
+.button-container {
+  display: flex;
+  flex-direction: column; 
+  align-items: center;   
+  gap: 15px;              
+  width: 100%;            
+  margin-top: 20px;
+}
+
+.login-btn, .btn-create {
+  width: 100%;                 
+  padding: 12px;
+  border-radius: 25px;
+  font-weight: bold;
+  cursor: pointer;
+  text-align: center;
+  border: none;
+  background-color: #007c89; 
+  color: #ffffff;
+  transition: background-color 0.3s ease; 
+  
+
+}
+.login-btn:hover, .btn-create:hover {
+  background-color: #005f69; 
+}
+.forgot-links { margin-top: 25px; display: flex; gap: 15px; font-size: 14px; }
+.forgot-links a { color: #007c89; text-decoration: underline; }
