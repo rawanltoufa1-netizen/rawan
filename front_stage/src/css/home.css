@@ -414,10 +414,7 @@
   color: #7f8c8d;
   font-style: italic;
 }
-/* ===================================
-   STYLES POUR MODAL STAGIAIRES
-   À ajouter à la fin de votre fichier home.css
-   =================================== */
+
 
 /* Overlay - Fond sombre */
 .modal-overlay-stagiaires {
@@ -653,14 +650,14 @@
   font-size: 15px;
 }
 
-/* Divider */
+
 .divider {
   height: 2px;
   background: linear-gradient(to right, transparent, #e0e0e0, transparent);
   margin: 30px 0;
 }
 
-/* Footer */
+
 .modal-footer-stagiaires {
   padding: 15px 25px;
   border-top: 2px solid #e0e0e0;
@@ -688,7 +685,7 @@
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
-/* Scrollbar personnalisée */
+
 .modal-body-stagiaires::-webkit-scrollbar {
   width: 8px;
 }
@@ -707,7 +704,6 @@
   background: #5568d3;
 }
 
-/* Responsive */
 @media (max-width: 768px) {
   .modal-content-stagiaires {
     width: 95%;

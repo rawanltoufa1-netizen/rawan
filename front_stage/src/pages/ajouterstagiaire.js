@@ -23,7 +23,7 @@ const AjouterStagiaire = () => {
                 navigate('/home'); 
             }
         } catch (error) {
-            console.error("Erreur ajout:", error);
+            console.error("Erreur d'ajout:", error);
         }
     };
 

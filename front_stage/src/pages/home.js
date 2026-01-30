@@ -51,6 +51,19 @@ const Home = () => {
   // URL de base pour l'API
   const API_URL = 'http://127.0.0.1:5028/api';
 
+  // --- VALIDATION TÉLÉPHONE ---
+  const validatePhone = (phone) => {
+    // Accepter uniquement les chiffres
+    return /^\d*$/.test(phone);
+  };
+
+  const handlePhoneChange = (value, setterFunction, fieldName) => {
+    // Permettre uniquement les chiffres
+    if (validatePhone(value) || value === '') {
+      setterFunction(prev => ({ ...prev, [fieldName]: value }));
+    }
+  };
+
   // --- RÉCUPÉRATION DES DONNÉES ---
   const fetchData = async () => {
     setLoading(true);
@@ -127,15 +140,18 @@ const Home = () => {
       const stagStart = formatDate(item.periode_de);
       const stagEnd = formatDate(item.periode_a);
 
-      // Logique de chevauchement des dates
+      // Logique de correspondance exacte des dates
       let matchDate = true;
 
       if (searchStart && searchEnd) {
-        matchDate = !(stagEnd < searchStart || stagStart > searchEnd);
+        // Les deux dates doivent correspondre exactement
+        matchDate = (stagStart === searchStart && stagEnd === searchEnd);
       } else if (searchStart) {
-        matchDate = stagEnd >= searchStart;
+        // La date de début doit correspondre exactement
+        matchDate = stagStart === searchStart;
       } else if (searchEnd) {
-        matchDate = stagStart <= searchEnd;
+        // La date de fin doit correspondre exactement
+        matchDate = stagEnd === searchEnd;
       }
 
       const isMatch = hasSearch && matchName && matchType && matchDate;
@@ -171,6 +187,12 @@ const Home = () => {
 
     if (view === 'encadreur' && !editData.email) {
       alert("❌ L'email est obligatoire");
+      return;
+    }
+
+    // Validation du téléphone
+    if (editData.tel && !validatePhone(editData.tel)) {
+      alert("❌ Le numéro de téléphone doit contenir uniquement des chiffres");
       return;
     }
 
@@ -299,6 +321,12 @@ const Home = () => {
         return;
       }
     }
+
+    // Validation du téléphone
+    if (formData.tel && !validatePhone(formData.tel)) {
+      alert("❌ Le numéro de téléphone doit contenir uniquement des chiffres");
+      return;
+    }
     
     console.log("📤 Envoi stagiaire:", formData);
     
@@ -352,6 +380,12 @@ const Home = () => {
       return;
     }
 
+    // Validation du téléphone
+    if (formEncData.tel && !validatePhone(formEncData.tel)) {
+      alert("❌ Le numéro de téléphone doit contenir uniquement des chiffres");
+      return;
+    }
+
     console.log("📤 Envoi encadreur:", formEncData);
     
     try {
@@ -388,11 +422,15 @@ const Home = () => {
     setSearchEnd('');
   };
 
-  // --- DÉCONNEXION ---
+  // --- DÉCONNEXION SIMPLE ET PROPRE ---
   const handleLogout = () => {
     if (window.confirm('Voulez-vous vraiment vous déconnecter ?')) {
-      localStorage.removeItem('username');
-      navigate('/');
+      // Nettoyer tout le localStorage
+      localStorage.clear();
+      sessionStorage.clear();
+      
+      // Rediriger vers la page de connexion avec replace (empêche le retour)
+      navigate('/', { replace: true });
     }
   };
 
@@ -867,11 +905,9 @@ const Home = () => {
                   <label>Téléphone:</label>
                   <input
                     type="text"
-                    placeholder="Téléphone"
+                    placeholder="Téléphone (chiffres uniquement)"
                     value={editData.tel || ''}
-                    onChange={(e) =>
-                      setEditData({ ...editData, tel: e.target.value })
-                    }
+                    onChange={(e) => handlePhoneChange(e.target.value, setEditData, 'tel')}
                   />
 
                   {view === 'stagiaire' ? (
@@ -1011,12 +1047,10 @@ const Home = () => {
                   <label>Téléphone *:</label>
                   <input
                     type="text"
-                    placeholder="Téléphone"
+                    placeholder="Téléphone (chiffres uniquement)"
                     required
                     value={formData.tel}
-                    onChange={(e) =>
-                      setFormData({ ...formData, tel: e.target.value })
-                    }
+                    onChange={(e) => handlePhoneChange(e.target.value, setFormData, 'tel')}
                   />
                   <label>Institution:</label>
                   <input
@@ -1140,11 +1174,9 @@ const Home = () => {
                   <label>Téléphone:</label>
                   <input
                     type="text"
-                    placeholder="Téléphone"
+                    placeholder="Téléphone (chiffres uniquement)"
                     value={formEncData.tel}
-                    onChange={(e) =>
-                      setFormEncData({ ...formEncData, tel: e.target.value })
-                    }
+                    onChange={(e) => handlePhoneChange(e.target.value, setFormEncData, 'tel')}
                   />
                 </div>
                 <div className="modal-actions">

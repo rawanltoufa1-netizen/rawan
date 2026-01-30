@@ -13,7 +13,7 @@ app.use(express.json());
 /* ================= ROUTE LOGIN ================= */
 app.post('/api/login', async (req, res) => {
   try {
-    console.log("📩 محاولة تسجيل دخول:", req.body.email);
+    console.log("tentative d'inscription", req.body.email);
     
     const { email, password } = req.body;
     
@@ -23,32 +23,32 @@ app.post('/api/login', async (req, res) => {
     );
 
     if (result.rows.length === 0) {
-      console.log("❌ البريد الإلكتروني غير موجود");
+      console.log("❌ email nom trouvable");
       return res.status(401).json({ 
-        error: "البريد الإلكتروني غير موجود" 
+        error: "email nom trouvable" 
       });
     }
 
     const user = result.rows[0];
-    console.log("✅ المستخدم موجود:", user.email);
+    console.log("✅ utilisateur trouvable", user.email);
 
     if (!user.password_hash) {
-      console.log("❌ كلمة المرور غير محفوظة");
+      console.log("❌ mot de pass nom enregister");
       return res.status(500).json({ 
-        error: "خطأ في إعداد الحساب" 
+        error: "erreur de creation" 
       });
     }
 
     const validPassword = await bcrypt.compare(password, user.password_hash);
     
     if (!validPassword) {
-      console.log("❌ كلمة المرور غير صحيحة");
+      console.log("❌ mot de pass nom correct");
       return res.status(401).json({ 
-        error: "كلمة المرور غير صحيحة" 
+        error: "mot de pass nom correct" 
       });
     }
 
-    console.log("✅ تسجيل دخول ناجح!");
+    console.log("✅ connexion reussit");
 
     res.json({
       success: true,
@@ -60,25 +60,24 @@ app.post('/api/login', async (req, res) => {
     });
 
   } catch (err) {
-    console.error("💥 خطأ في login:", err.message);
-    res.status(500).json({ error: "خطأ في السيرفر: " + err.message });
+    console.error("💥 erreur de connexion", err.message);
+    res.status(500).json({ error: "erreur de serveur " + err.message });
   }
 });
 
 /* ================= ROUTES STAGIAIRES ================= */
 
-// جلب جميع المتدربين
+
 app.get('/api/stagiaires', async (req, res) => {
   try {
     const all = await pool.query("SELECT * FROM stagiaires ORDER BY id DESC");
     res.json(all.rows);
   } catch (err) {
     console.error("Erreur get stagiaires:", err.message);
-    res.status(500).json({ error: "خطأ في السيرفر" });
+    res.status(500).json({ error: "erruer de serveur" });
   }
 });
 
-// إضافة متدرب
 app.post('/api/stagiaires', async (req, res) => {
   try {
     const { nom, prenom, tel, institution, departement, type_stage, periode_de, periode_a } = req.body;
@@ -103,7 +102,6 @@ app.post('/api/stagiaires', async (req, res) => {
   }
 });
 
-// تعديل متدرب
 app.put('/api/stagiaires/:id', async (req, res) => {
   try {
     const { id } = req.params;
@@ -118,11 +116,11 @@ app.put('/api/stagiaires/:id', async (req, res) => {
     res.json({ message: "Stagiaire mis à jour !" });
   } catch (err) {
     console.error("💥 Erreur update stagiaire:", err.message);
-    res.status(500).json({ error: "خطأ في السيرفر" });
+    res.status(500).json({ error: "erreur de serveur" });
   }
 });
 
-// حذف متدرب
+
 app.delete('/api/stagiaires/:id', async (req, res) => {
   try {
     const { id } = req.params;
@@ -131,24 +129,23 @@ app.delete('/api/stagiaires/:id', async (req, res) => {
     res.json({ message: "Stagiaire supprimé !" });
   } catch (err) {
     console.error("💥 Erreur delete stagiaire:", err.message);
-    res.status(500).json({ error: "خطأ في السيرفر" });
+    res.status(500).json({ error: "erreur de serveur" });
   }
 });
 
 /* ================= ROUTES ENCADREURS ================= */
 
-// جلب جميع المدربين
+
 app.get('/api/encadreurs', async (req, res) => {
   try {
     const all = await pool.query("SELECT * FROM encadreurs ORDER BY id DESC");
     res.json(all.rows);
   } catch (err) {
     console.error("Erreur get encadreurs:", err.message);
-    res.status(500).json({ error: "خطأ في السيرفر" });
+    res.status(500).json({ error: "erreur de serveur" });
   }
 });
 
-// إضافة مدرب - AVEC CORRECTION
 app.post('/api/encadreurs', async (req, res) => {
   try {
     const { nom, prenom, poste, email, tel } = req.body;
@@ -215,7 +212,6 @@ app.post('/api/encadreurs', async (req, res) => {
   }
 });
 
-// تعديل مدرب
 app.put('/api/encadreurs/:id', async (req, res) => {
   try {
     const { id } = req.params;
@@ -246,7 +242,7 @@ app.put('/api/encadreurs/:id', async (req, res) => {
   }
 });
 
-// حذف مدرب
+
 app.delete('/api/encadreurs/:id', async (req, res) => {
   try {
     const { id } = req.params;
@@ -268,11 +264,11 @@ app.delete('/api/encadreurs/:id', async (req, res) => {
     res.json({ message: "Encadreur supprimé !" });
   } catch (err) {
     console.error("💥 Erreur delete encadreur:", err.message);
-    res.status(500).json({ error: "خطأ في السيرفر" });
+    res.status(500).json({ error: "erreur de serveur" });
   }
 });
 
-// ربط متدرب بمدرب
+
 app.post('/api/encadreurs/:id/stagiaires/:stagId', async (req, res) => {
   try {
     const { id, stagId } = req.params;
@@ -284,7 +280,7 @@ app.post('/api/encadreurs/:id/stagiaires/:stagId', async (req, res) => {
     );
     
     if (stagiaire.rows.length === 0) {
-      return res.status(404).json({ error: "المتدرب غير موجود" });
+      return res.status(404).json({ error: "stagiair nom trouvable" });
     }
 
     // Vérifier que l'encadreur existe
@@ -294,7 +290,7 @@ app.post('/api/encadreurs/:id/stagiaires/:stagId', async (req, res) => {
     );
     
     if (encadreur.rows.length === 0) {
-      return res.status(404).json({ error: "المدرب غير موجود" });
+      return res.status(404).json({ error: "stagiaire nom trouvable" });
     }
 
     // Mettre à jour le stagiaire
@@ -305,16 +301,15 @@ app.post('/api/encadreurs/:id/stagiaires/:stagId', async (req, res) => {
 
     console.log(`✅ Stagiaire ${stagId} affecté à l'encadreur ${id}`);
     res.status(200).json({ 
-      message: "تم ربط المتدرب!", 
+      message: "effecter", 
       stagiaire: stagiaire.rows[0] 
     });
   } catch (err) {
     console.error("💥 Erreur affecter stagiaire:", err.message);
-    res.status(500).json({ error: "خطأ في السيرفر" });
+    res.status(500).json({ error: "erreur de serveur" });
   }
 });
 
-// إزالة متدرب من مدرب
 app.delete('/api/encadreurs/:id/stagiaires/:stagId', async (req, res) => {
   try {
     const { stagId } = req.params;
@@ -323,14 +318,12 @@ app.delete('/api/encadreurs/:id/stagiaires/:stagId', async (req, res) => {
       [stagId]
     );
     console.log(`✅ Stagiaire ${stagId} retiré de son encadreur`);
-    res.json({ message: "تم إزالة المتدرب من المدرب !" });
+    res.json({ message: "rejeter" });
   } catch (err) {
     console.error("💥 Erreur retirer stagiaire:", err.message);
-    res.status(500).json({ error: "خطأ في السيرفر" });
+    res.status(500).json({ error: "erreur de serveur" });
   }
 });
-
-// جلب جميع المتدربين لمدرب معين
 app.get('/api/encadreurs/:id/stagiaires', async (req, res) => {
   try {
     const { id } = req.params;
@@ -341,11 +334,10 @@ app.get('/api/encadreurs/:id/stagiaires', async (req, res) => {
     res.json(result.rows);
   } catch (err) {
     console.error("💥 Erreur get stagiaires encadreur:", err.message);
-    res.status(500).json({ error: "خطأ في السيرفر" });
+    res.status(500).json({ error: "erreur de serveur" });
   }
 });
 
-// تشغيل السيرفر
 app.listen(PORT, () => {
-  console.log(`✅ السيرفر يعمل على http://127.0.0.1:${PORT}`);
+  console.log(`✅ http://127.0.0.1:${PORT}`);
 });

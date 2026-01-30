@@ -64,7 +64,6 @@ const handleUpdate = async (e) => {
     });
 
     if (response.ok) {
-      // update localStorage AFTER success
       localStorage.setItem('username', userData.username);
       setMessage("Compte mis à jour avec succès !");
       setTimeout(() => navigate('/home'), 2000);

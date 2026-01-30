@@ -3,14 +3,11 @@ import { useNavigate } from 'react-router-dom';
 
 const ModifierCompte = () => {
   const navigate = useNavigate();
-  
-  // États pour les informations actuelles
+
   const [currentData, setCurrentData] = useState({
     username: '',
     email: '',
   });
-
-  // États pour les nouveaux champs
   const [formData, setFormData] = useState({
     username: '',
     email: '',
@@ -23,7 +20,6 @@ const ModifierCompte = () => {
   const [success, setSuccess] = useState(false);
 
   useEffect(() => {
-    // Récupérer les données actuelles du localStorage
     const savedUsername = localStorage.getItem('username');
     const savedEmail = localStorage.getItem('email');
     
@@ -54,8 +50,6 @@ const ModifierCompte = () => {
     e.preventDefault();
     setError('');
     setSuccess(false);
-
-    // Validation du nom d'utilisateur
     if (!formData.username.trim()) {
       setError('Le nom d\'utilisateur ne peut pas être vide');
       return;
@@ -65,14 +59,10 @@ const ModifierCompte = () => {
       setError('Le nom d\'utilisateur doit contenir au moins 3 caractères');
       return;
     }
-
-    // Validation de l'email si fourni
     if (formData.email && !isValidEmail(formData.email)) {
       setError('Format d\'email invalide');
       return;
     }
-
-    // Validation du mot de passe si changement demandé
     if (formData.newPassword || formData.confirmPassword) {
       if (!formData.currentPassword) {
         setError('Veuillez entrer votre mot de passe actuel');
@@ -88,16 +78,12 @@ const ModifierCompte = () => {
         setError('Les mots de passe ne correspondent pas');
         return;
       }
-
-      // Vérifier le mot de passe actuel (normalement via API)
       const savedPassword = localStorage.getItem('password');
       if (savedPassword && formData.currentPassword !== savedPassword) {
         setError('Mot de passe actuel incorrect');
         return;
       }
     }
-
-    // Sauvegarder les modifications
     try {
       localStorage.setItem('username', formData.username.trim());
       
@@ -123,8 +109,6 @@ const ModifierCompte = () => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return emailRegex.test(email);
   };
-
-  // Styles intégrés
   const styles = {
     wrapper: {
       minHeight: '100vh',
@@ -310,10 +294,8 @@ const ModifierCompte = () => {
           {success && (
             <div style={{...styles.alert, ...styles.alertSuccess}}>
               ✅ Modifications enregistrées avec succès ! Redirection...
-            </div>
-          )}
+            </div>          )}
 
-          {/* Section Informations générales */}
           <div style={styles.sectionTitle}>📋 Informations générales</div>
 
           <div style={styles.formGroup}>
@@ -364,8 +346,6 @@ const ModifierCompte = () => {
               }}
             />
           </div>
-
-          {/* Section Mot de passe */}
           <div style={styles.sectionTitle}>🔐 Changer le mot de passe</div>
           <span style={{...styles.hint, marginTop: '-10px'}}>
             Laissez vide si vous ne souhaitez pas changer votre mot de passe

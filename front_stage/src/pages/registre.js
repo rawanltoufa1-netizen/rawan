@@ -10,22 +10,19 @@ const Registre = () => {
   const navigate = useNavigate();
 
   const handleRegister = async (e) => {
-    e.preventDefault(); // يمنع الصفحة باش تعمل Refresh
+    e.preventDefault(); 
 
-    // 1. التثبت من تطابق كلمات السر
     if (password !== confirmPassword) {
       alert("❌ Les mots de passe ne correspondent pas");
-      return; // يوقف العملية هوني وما يبعثش للسيرفر
+      return; 
     }
 
-    // 2. التثبت من قوة كلمة السر (Regex)
     const passwordRegex = /^(?=.*[A-Z])(?=.*\d).{8,}$/;
     if (!passwordRegex.test(password)) {
       alert("❌ Le mot de passe doit contenir au moins une majuscule, un chiffre et faire au moins 8 caractères.");
-      return; // يوقف العملية هوني
+      return; 
     }
 
-    // 3. إذا كل شيء مريقل، نبعثوا للسيرفر
     try {
       const response = await fetch('http://127.0.0.1:5028/api/register', {
         method: 'POST',
@@ -37,7 +34,6 @@ const Registre = () => {
 
       if (response.ok) {
         alert("✅ " + data.message);
-        // هوني نبعثوا الـ email لصفحة الـ login
         navigate('/login', { state: { email: email } });
       } else {
         alert("❌ " + (data.error || data.message));
@@ -48,7 +44,7 @@ const Registre = () => {
   };
 
   return (
-    <div className="login-wrapper"> {/* استعمل نفس الـ wrapper متاع الـ login باش يجيو كيف كيف */}
+    <div className="login-wrapper"> 
       <div className="login-card">
         <h2 className="login-title">Créer un compte</h2>
 

@@ -18,7 +18,6 @@ function App() {
         <Route path="/registre" element={<Registre />} />
         <Route path="/forgot-password" element={<ForgotPassword />} />
         <Route path="/modifier-compte" element={<ModifierCompte />} />
-        {/* Route par défaut pour les chemins non trouvés */}
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </BrowserRouter>
